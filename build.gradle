@@ -1,0 +1,17 @@
+apply plugin: 'groovy'
+
+group = 'org.frayer.gradle.plugins.websphere'
+version = '0.0.1-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile gradleApi()
+    groovy localGroovy()
+    
+    testCompile(
+        'org.spockframework:spock-core:0.6-groovy-1.8',
+        'junit:junit:4.10')
+}
