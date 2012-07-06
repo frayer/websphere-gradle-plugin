@@ -15,7 +15,6 @@ public class WebSpherePlugin implements Plugin<Project> {
 
         // TODO Should use .create('websphere', WebSphereExtension) here, causing issues in STS at the moment though.
         project.extensions.add('websphere', webSphereExtension)
-        project.logger.lifecycle("wasHome: ${project.websphere.wasHome}")
 
         project.afterEvaluate {
             project.task(type: WsAntListAppsTask, 'wsListApps') {
