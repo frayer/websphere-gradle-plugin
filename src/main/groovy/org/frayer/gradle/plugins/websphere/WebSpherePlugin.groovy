@@ -20,6 +20,7 @@ public class WebSpherePlugin implements Plugin<Project> {
             project.task(type: WsAntListAppsTask, 'wsListApps') {
                 wasHome = project.websphere.wasHome
                 profileName = project.websphere.profileName
+				conntype = project.websphere.conntype
             }
         }
     }

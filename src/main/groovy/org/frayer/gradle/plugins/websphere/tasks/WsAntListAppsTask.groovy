@@ -27,6 +27,6 @@ class WsAntListAppsTask extends WsAntWrapperTask {
 
     @Override
     def getAttributes() {
-        [wasHome: wasHome, profileName: profileName]
+        [wasHome: wasHome, profileName: profileName, conntype: conntype]
     }
 }
