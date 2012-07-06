@@ -10,7 +10,7 @@ import org.gradle.api.tasks.TaskAction;
 abstract class WsAntWrapperTask extends DefaultTask {
     String workingDirectory = "${project.buildDir}/websphere-gradle-plugin"
     String wasHome
-	String conntype
+    String conntype
 
     abstract String getAntTaskName()
     abstract String getAntTaskClassName()
@@ -24,14 +24,14 @@ abstract class WsAntWrapperTask extends DefaultTask {
     @TaskAction
     def executeTask() {
         writeAntScriptFile()
-		executeAntScript()
+        executeAntScript()
     }
-	
-	def executeAntScript() {
-		def wsAntProc = "${wasHome}/bin/ws_ant.sh -f ${workingDirectory}/build.xml".execute()
-		wsAntProc.consumeProcessOutput(System.out, System.err)
-		wsAntProc.waitFor()
-	}
+
+    def executeAntScript() {
+        def wsAntProc = "${wasHome}/bin/ws_ant.sh -f ${workingDirectory}/build.xml".execute()
+        wsAntProc.consumeProcessOutput(System.out, System.err)
+        wsAntProc.waitFor()
+    }
 
     def writeAntScriptFile() {
         project.mkdir(workingDirectory)
