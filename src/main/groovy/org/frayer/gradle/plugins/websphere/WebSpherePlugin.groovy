@@ -12,9 +12,7 @@ public class WebSpherePlugin implements Plugin<Project> {
     @Override
     public void apply(Project project) {
         def webSphereExtension = new WebSphereExtension()
-
-        // TODO Should use .create('websphere', WebSphereExtension) here, causing issues in STS at the moment though.
-        project.extensions.add('websphere', webSphereExtension)
+        project.extensions.create('websphere', WebSphereExtension)
 
         project.afterEvaluate {
             project.task(type: WsAntListAppsTask, 'wsListApps') {
