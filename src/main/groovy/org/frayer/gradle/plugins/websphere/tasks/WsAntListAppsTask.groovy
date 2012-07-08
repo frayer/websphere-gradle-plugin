@@ -8,6 +8,8 @@ package org.frayer.gradle.plugins.websphere.tasks
  * @author <a href="mailto:frayer@frayer.org">Michael Frayer</a>
  */
 class WsAntListAppsTask extends WsAntWrapperTask {
+    static final String PROFILE_NAME = 'profileName'
+
     String profileName
 
     @Override
@@ -26,7 +28,11 @@ class WsAntListAppsTask extends WsAntWrapperTask {
     }
 
     @Override
-    def getAttributes() {
-        [wasHome: wasHome, profileName: profileName, conntype: conntype]
+    public Object getApplicablePropertyNames() {
+        [
+            WAS_HOME,
+            CONNTYPE,
+            PROFILE_NAME
+        ]
     }
 }
