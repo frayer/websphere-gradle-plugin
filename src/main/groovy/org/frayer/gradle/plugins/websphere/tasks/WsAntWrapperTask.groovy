@@ -32,8 +32,10 @@ abstract class WsAntWrapperTask extends DefaultTask {
     @TaskAction
     def executeTask() {
         populateApplicableProperties()
-        writeAntScript()
-        executeAntScript()
+        if (validate()) {
+            writeAntScript()
+            executeAntScript()
+        }
     }
 
     def executeAntScript() {
@@ -86,5 +88,13 @@ abstract class WsAntWrapperTask extends DefaultTask {
 
     def populateApplicableProperties() {
         propertyPopulator.populate(this, applicableExtensionPropertyValues)
+    }
+
+    boolean validate() {
+        if (wasHome == null) {
+            logger.warn("'wasHome' must be provided in order for ${name} to run. This task is being skipped.")
+            return false
+        }
+        return true
     }
 }
