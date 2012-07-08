@@ -22,19 +22,29 @@ This will produce a JAR at "build/libs/websphere-gradle-plugin-0.0.1-SNAPSHOT.ja
 to the root of the project. The only WebSphere ANT Task working at the moment is wsListApps.
 The following is an example Gradle build file showing how this plugin can be used.
 
+    import org.frayer.gradle.plugins.websphere.tasks.WsAntListAppsTask
+
     apply plugin: 'websphere'
-    
+
+    repositories {
+        mavenCentral()
+    }
+
     buildscript {
         dependencies {
-            classpath files('build/libs/websphere-gradle-plugin-0.0.1-SNAPSHOT.jar')
+            classpath fileTree(dir: 'build/libs', include: '**/*.jar')
         }
     }
-    
+
     websphere {
-        wasHome = '/home/was-user/IBM/WebSphere/AppServer'
-        profileName = 'AppSrv01'
+        wasHome = '/Users/user/IBM/WebSphere/AppServer'
         conntype = 'NONE'
     }
+
+    task 'wsListApps'(type: WsAntListAppsTask) {
+        profileName = 'myProfile'
+    }
+
 
 Assuming this file was named "test.gradle" and was in the root of this project you
 could execute the following command:
