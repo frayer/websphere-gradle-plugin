@@ -50,4 +50,11 @@ class WsAntWrapperTaskTest extends Specification {
         antAttributeValues.conntype == CONNTYPE_VALUE
         antAttributeValues.profileName == PROFILE_NAME_VALUE
     }
+
+    def "it returns unique ANT Build Script paths"() {
+        expect:
+        wsAntListAppsTask.nextWsAntBuildScriptPath.endsWith('websphere-gradle-plugin/build-wsListApps-1.xml')
+        wsAntListAppsTask.nextWsAntBuildScriptPath.endsWith('websphere-gradle-plugin/build-wsListApps-2.xml')
+        wsAntListAppsTask.nextWsAntBuildScriptPath.endsWith('websphere-gradle-plugin/build-wsListApps-3.xml')
+    }
 }

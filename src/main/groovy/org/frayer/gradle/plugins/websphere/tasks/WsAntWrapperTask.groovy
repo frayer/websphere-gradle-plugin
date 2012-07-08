@@ -16,6 +16,7 @@ abstract class WsAntWrapperTask extends DefaultTask {
     static final String WAS_HOME = 'wasHome'
     static final String CONNTYPE = 'conntype'
 
+    static int buildScriptCounter = 0
     PropertyPopulator propertyPopulator = new PriorityToObjectPropertyPopulator()
     String workingDirectory = "${project.buildDir}/websphere-gradle-plugin"
     String wasHome
@@ -34,9 +35,15 @@ abstract class WsAntWrapperTask extends DefaultTask {
     def executeTask() {
         populateApplicableProperties()
         if (validate()) {
-            writeAntScript()
-            executeAntScript()
+            def wsAntBuildScriptPath = getNextWsAntBuildScriptPath()
+            writeAntScript(wsAntBuildScriptPath)
+            executeAntScript(wsAntBuildScriptPath)
         }
+    }
+
+    def getNextWsAntBuildScriptPath() {
+        buildScriptCounter++
+        "${workingDirectory}/build-${antTaskName}-${buildScriptCounter}.xml"
     }
 
     def getPathToWsAntScript() {
@@ -47,7 +54,7 @@ abstract class WsAntWrapperTask extends DefaultTask {
         wasAntDirectory.listFiles().find { it.name ==~ wsAntFileNamePattern }?.absolutePath
     }
 
-    def executeAntScript() {
+    def executeAntScript(antBuildScriptPath) {
         def wsAntScriptPath = pathToWsAntScript
 
         if (!wsAntScriptPath) {
@@ -56,14 +63,14 @@ abstract class WsAntWrapperTask extends DefaultTask {
             throw new InvalidUserDataException(message)
         }
 
-        def wsAntProc = "${pathToWsAntScript} -f ${workingDirectory}/build.xml".execute()
+        def wsAntProc = "${pathToWsAntScript} -f ${antBuildScriptPath}".execute()
         wsAntProc.consumeProcessOutput(System.out, System.err)
         wsAntProc.waitFor()
     }
 
-    def writeAntScript() {
+    def writeAntScript(antBuildScriptPath) {
         project.mkdir(workingDirectory)
-        def file = new File("${workingDirectory}/build.xml")
+        def file = new File(antBuildScriptPath)
         file.createNewFile()
         file.withWriter { writer ->
             writer.write(antScriptMarkup)
