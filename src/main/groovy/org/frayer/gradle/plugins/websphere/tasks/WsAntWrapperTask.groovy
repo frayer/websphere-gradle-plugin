@@ -32,7 +32,7 @@ abstract class WsAntWrapperTask extends DefaultTask {
     @TaskAction
     def executeTask() {
         populateApplicableProperties()
-        writeAntScriptFile()
+        writeAntScript()
         executeAntScript()
     }
 
@@ -42,7 +42,7 @@ abstract class WsAntWrapperTask extends DefaultTask {
         wsAntProc.waitFor()
     }
 
-    def writeAntScriptFile() {
+    def writeAntScript() {
         project.mkdir(workingDirectory)
         def file = new File("${workingDirectory}/build.xml")
         file.createNewFile()
