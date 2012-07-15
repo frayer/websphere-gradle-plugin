@@ -5,7 +5,7 @@ package org.frayer.gradle.plugins.websphere.tasks
  * Lists all the applications installed on a WebSphere Server or Cell. This goal is a wrapper for the AdminApp.list()
  * command of the wsadmin tool. Refer to the wsadmin documentation for information on this operation.
  *
- * @author <a href="mailto:frayer@frayer.org">Michael Frayer</a>
+ * @author Michael Frayer
  */
 class WsAntListAppsTask extends WsAntWrapperTask {
     static final String PROFILE_NAME = 'profileName'
@@ -28,7 +28,7 @@ class WsAntListAppsTask extends WsAntWrapperTask {
     }
 
     @Override
-    public Object getApplicablePropertyNames() {
+    def getApplicablePropertyNames() {
         [
             WAS_HOME,
             CONNTYPE,
