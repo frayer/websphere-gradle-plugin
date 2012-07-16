@@ -1,6 +1,6 @@
 import org.frayer.gradle.plugins.websphere.tasks.WsAntListAppsTask
 
-defaultTasks 'listApps'
+defaultTasks 'wsListApps'
 
 apply plugin: 'websphere'
 
@@ -16,4 +16,4 @@ websphere {
     conntype = 'NONE'
 }
 
-task listApps(type: WsAntListAppsTask)
+task wsListApps(type: WsAntListAppsTask)
