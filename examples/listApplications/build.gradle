@@ -1,0 +1,19 @@
+import org.frayer.gradle.plugins.websphere.tasks.WsAntListAppsTask
+
+defaultTasks 'listApps'
+
+apply plugin: 'websphere'
+
+buildscript {
+    dependencies {
+        classpath files("${project.buildDir}/../../../build/libs/websphere-gradle-plugin-0.0.1-SNAPSHOT.jar")
+    }
+}
+
+websphere {
+    wasHome = '/home/michael/IBM/WebSphere/AppServer'
+    profileName = 'AppSrv01'
+    conntype = 'NONE'
+}
+
+task listApps(type: WsAntListAppsTask)
