@@ -52,7 +52,10 @@ class WsAntWrapperTaskTest extends Specification {
     }
 
     def "it returns unique ANT Build Script paths"() {
-        expect:
+        when:
+        wsAntListAppsTask.buildScriptCounter = 0
+        
+        then:
         wsAntListAppsTask.nextWsAntBuildScriptPath.endsWith('websphere-gradle-plugin/build-wsListApps-1.xml')
         wsAntListAppsTask.nextWsAntBuildScriptPath.endsWith('websphere-gradle-plugin/build-wsListApps-2.xml')
         wsAntListAppsTask.nextWsAntBuildScriptPath.endsWith('websphere-gradle-plugin/build-wsListApps-3.xml')

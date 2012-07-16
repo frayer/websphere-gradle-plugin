@@ -8,9 +8,22 @@ package org.frayer.gradle.plugins.websphere.tasks
  * @author Michael Frayer
  */
 class WsAntListAppsTask extends WsAntWrapperTask {
+    static final String JAVA_PROPERTIES_GRADLE = 'javaProperties'
+    static final String JAVA_PROPERTIES_ANT = 'properties'
+    static final String PROFILE = 'profile'
     static final String PROFILE_NAME = 'profileName'
+    static final String HOST = 'host'
+    static final String PORT = 'port'
+    static final String USER = 'user'
+    static final String PASSWORD = 'password'
 
+    String javaProperties
+    String profile
     String profileName
+    String host
+    String port
+    String user
+    String password
 
     @Override
     String getDescription() {
@@ -30,9 +43,15 @@ class WsAntListAppsTask extends WsAntWrapperTask {
     @Override
     def getApplicablePropertyNames() {
         [
-            WAS_HOME,
-            CONNTYPE,
-            PROFILE_NAME
+            [gradleName: WAS_HOME,               antName: WAS_HOME],
+            [gradleName: JAVA_PROPERTIES_GRADLE, antName: JAVA_PROPERTIES_ANT],
+            [gradleName: PROFILE,                antName: PROFILE],
+            [gradleName: PROFILE_NAME,           antName: PROFILE_NAME],
+            [gradleName: CONNTYPE,               antName: CONNTYPE],
+            [gradleName: HOST,                   antName: HOST],
+            [gradleName: PORT,                   antName: PORT],
+            [gradleName: USER,                   antName: USER],
+            [gradleName: PASSWORD,               antName: PASSWORD]
         ]
     }
 }

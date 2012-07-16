@@ -16,7 +16,7 @@ abstract class WsAntWrapperTask extends DefaultTask {
     static final String WAS_HOME = 'wasHome'
     static final String CONNTYPE = 'conntype'
 
-    static int buildScriptCounter = 0
+    int buildScriptCounter = 0
     PropertyPopulator propertyPopulator = new PriorityToObjectPropertyPopulator()
     String workingDirectory = "${project.buildDir}/websphere-gradle-plugin"
     String wasHome
@@ -91,9 +91,9 @@ abstract class WsAntWrapperTask extends DefaultTask {
 
     def getAntAttributeValues() {
         def antAttributeValues = [:]
-        applicablePropertyNames.each { propertyName ->
-            if (this.hasProperty(propertyName) && this[propertyName] != null) {
-                antAttributeValues[propertyName] = this[propertyName]
+        applicablePropertyNames.each { property ->
+            if (this.hasProperty(property.gradleName) && this[property.gradleName] != null) {
+                antAttributeValues[property.antName] = this[property.gradleName]
             }
         }
         return antAttributeValues
@@ -102,9 +102,9 @@ abstract class WsAntWrapperTask extends DefaultTask {
     def getApplicableExtensionPropertyValues() {
         WebSphereExtension webSphereExtension = project.websphere
         def applicableExtensionPropertyValues = [:]
-        applicablePropertyNames.each { propertyName ->
-            if (webSphereExtension.hasProperty(propertyName)) {
-                applicableExtensionPropertyValues[propertyName] = webSphereExtension[propertyName]
+        applicablePropertyNames.each { property ->
+            if (webSphereExtension.hasProperty(property.gradleName)) {
+                applicableExtensionPropertyValues[property.gradleName] = webSphereExtension[property.gradleName]
             }
         }
         return applicableExtensionPropertyValues
