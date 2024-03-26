@@ -1,8 +1,12 @@
-websphere-gradle-plugin
-=======================
+# websphere-gradle-plugin
 
-Overview
---------
+## Archive Notice
+
+I archived this repository on March 26, 2024 as part of some repository
+cleanup. Feel free to contact me if anyone decides to fork and carry this
+forward and I'd be happy to give a shoutout in this README.
+
+## Overview
 
 A Gradle Plugin which wraps the ws\_ant.(sh|bat) script to call the
 [WebSphere ANT Tasks](http://pic.dhe.ibm.com/infocenter/wasinfo/v6r1/index.jsp?topic=/com.ibm.websphere.javadoc.doc/public_html/api/com/ibm/websphere/ant/tasks/package-tree.html).
@@ -10,8 +14,7 @@ This plugin draws heavy inspiration from [was6-maven-plugin](http://mojo.codehau
 
 Stay tuned for more details and examples as this project is still in the early stages.
 
-Usage
------
+## Usage
 
 You'll need to build this plugin yourself for now to test it out. Builds can be done with
 Gradle v1.0 with the following command in the root of the project:
